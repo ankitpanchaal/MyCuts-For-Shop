@@ -1,24 +1,36 @@
 import { FontAwesome5 } from '@expo/vector-icons'
 import { View, Text, HStack, Image, Spacer, ScrollView, Spinner } from 'native-base'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity } from 'react-native'
 import BookingsCard from '../Components/BookingsCard'
 import ServiceCard from '../Components/ServiceCard'
 import { CallAPI } from '../utils/APIcall'
 import { GET_Services } from '../utils/Query'
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
+    const { shopsData } = route.params || {};
+    // console.log(">>>>>", shopsData?.Image);
+
     const { loading, error, data } = CallAPI(GET_Services, "services")
-    // console.log(data);
+
     return (
         <View flex={1} bg='bg' >
-            <HStack bg='text' px={8} py={4} borderBottomRadius={26} alignItems='center' >
+            <HStack bg='text' px={8} py={4}
+                borderBottomRadius={26} alignItems='center' alignSelf='center'
+            >
                 <Image mt={6}
-                    source={{ uri: "https://imgd.aeplcdn.com/1056x594/n/cw/ec/102709/ntorq-125-right-front-three-quarter.jpeg?isig=0&q=75" }}
-                    alt="Image" h={58} width={58} borderRadius={18}
+                    source={
+                        {
+                            uri: shopsData?.Image ? `${shopsData?.Image}` :
+                                "https://www.shutterstock.com/image-photo/adult-woman-hairdresser-wearing-protective-600w-1756653821.jpg"
+                        }
+                    }
+                    alt="Image" h={58} width={58} borderRadius={18} mr={4}
                 />
-                <Text fontFamily='body' fontSize={22} color='bg' mt={5} ml="23%" underline
-                    fontWeight={600} >Mirror</Text>
+                <View>
+                    <Text fontFamily='body' fontSize={22} color='bg' mt={5} underline
+                        fontWeight={600} >{shopsData?.ShopName}</Text>
+                </View>
 
                 <Spacer />
 
@@ -32,11 +44,12 @@ const HomeScreen = ({ navigation }) => {
 
             {/* Services */}
             <View mt={4} ml={2} >
-                <Text fontFamily='body' fontSize={16} color='text'
+                <Text fontFamily='body' fontSize={16} color='text' mt={2}
                     fontWeight={600} >Your Services</Text>
                 <View mt={2} >
                     {loading ? <Spinner size='lg' color='red' /> :
-                        <ServiceCard navigation={navigation} apiData={data.AllServices} />}
+                        <ServiceCard navigation={navigation} apiData={data.AllServices}
+                            currShopID={shopsData?.ShopID} />}
                 </View>
             </View>
 

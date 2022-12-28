@@ -34,7 +34,7 @@ const data = [
     },
 ]
 
-const ServiceCard = ({ navigation, apiData }) => {
+const ServiceCard = ({ navigation, apiData, currShopID }) => {
 
     return (
         <FlatList
@@ -43,19 +43,21 @@ const ServiceCard = ({ navigation, apiData }) => {
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => {
                 return (
-                    <TouchableOpacity activeOpacity={0.8}
-                        onPress={() => navigation.navigate("EditService", { item })} >
-                        <View borderRadius={12} shadow={1} p={3} px={6} bg="#FFF" mb={1} ml={2} >
-                            <Text fontFamily='body' fontSize={12} color='text' fontWeight={500} >{item.title}</Text>
+                    item?.ShopID === currShopID ?
+                        <TouchableOpacity activeOpacity={0.8}
+                            onPress={() => navigation.navigate("EditService", { item })} >
+                            <View borderRadius={12} shadow={1} p={3} px={6} bg="#FFF" mb={1} ml={2} >
+                                <Text fontFamily='body' fontSize={12} color='text' fontWeight={500} >{item.title}</Text>
 
-                            <HStack alignItems='center' my={1} >
-                                <MaterialIcons name="star-half" size={18} color="#ff8000" />
-                                <Text fontFamily='body' ml={1} fontSize={10} color="#ff8000"  >{item.tag}</Text>
-                            </HStack>
+                                <HStack alignItems='center' my={1} >
+                                    <MaterialIcons name="star-half" size={18} color="#ff8000" />
+                                    <Text fontFamily='body' ml={1} fontSize={10} color="#ff8000"  >{item.tag}</Text>
+                                </HStack>
 
-                            <Text fontFamily='body' fontSize={12} color='text' mt={1} >Price: {item.price}</Text>
-                        </View>
-                    </TouchableOpacity>
+                                <Text fontFamily='body' fontSize={12} color='text' mt={1} >Price: {item.price}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        : null
                 )
             }}
         />

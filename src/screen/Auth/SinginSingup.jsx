@@ -7,29 +7,34 @@ import { GET_SHOPS } from '../../utils/Query';
 
 const SinginSingup = ({ navigation }) => {
 
-  let MyData = "NN";
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { loading, error, data } = CallAPI(GET_SHOPS, "ALLSHOPS")
-  // console.log(">>>>>>>>>>>", data?.AllShopes[1]?.password);
 
+  let shopsData;
+  let lastIndex = 0;
 
+  // For last shop id or index
+  for (let i = 0; i < data?.AllShopes?.length + 2; i++) {
+    if (lastIndex < i) {
+      lastIndex = i;
+    }
+  }
+  // console.log(lastIndex);
+
+  // sing in auth
   const handelSingin = async () => {
-
     data.AllShopes.map((item, i) => {
       if (data?.AllShopes[i]?.email == email && data?.AllShopes[i]?.password == password) {
-        MyData = item.ShopID;
-        navigation.navigate("HomeScreen");
+        shopsData = item;
+        navigation.navigate("HomeScreen", { shopsData });
       }
     })
 
     if (email === "" || password === "") {
       return alert("Enter somthing")
     }
-
-    console.log(" data my", MyData);
-    // alert("You Entered wrong ID and Password")
 
   }
 
@@ -83,7 +88,7 @@ const SinginSingup = ({ navigation }) => {
       <HStack mt={6} alignSelf='center' >
         <Text fontSize={12} color='text' fontFamily='body' >Dont have an account? </Text>
         <Button p={0} bg="text" px={1} borderRadius={4}
-          onPress={() => navigation.navigate("SingUp")}
+          onPress={() => navigation.navigate("SingUp", { lastIndex })}
         >
           <Text fontSize={10} fontWeight="600" underline color='white' fontFamily='body' >SingUp</Text>
         </Button>

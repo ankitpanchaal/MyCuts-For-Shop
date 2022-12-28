@@ -82,3 +82,17 @@ export const ADD_SHOP = gql`
         }
     }
 `
+// export const GET_HOME_SCREEEN_DATA = gql`
+// query ALLDATA{
+//     AllServices{
+//         id
+//         title
+//         offer
+//         offerDis
+//         price
+//         tag
+//         Image
+//         ShopID
+//     }
+// }
+// `;

@@ -3,12 +3,15 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons'
 import { View, Text, HStack, Button, Image, ScrollView, Spinner } from 'native-base'
 import React, { useState } from 'react'
 import { TextInput } from 'react-native'
-import { ADD_SHOP } from '../../utils/Query'
+import { ADD_SHOP, GET_SHOPS } from '../../utils/Query'
 
-const SingUp = ({ navigation }) => {
-    const [shopID, setShopID] = useState(12);
+const SingUp = ({ navigation, route }) => {
+    const { lastIndex } = route.params || {};
+    console.log(lastIndex);
+
+    const [shopID, setShopID] = useState(lastIndex);
     const [shopName, setShopName] = useState('');
-    const [image, setImage] = useState('d');
+    const [image, setImage] = useState('https://www.shutterstock.com/image-photo/adult-woman-hairdresser-wearing-protective-600w-1756653821.jpg');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phoneNo, setPhoneNo] = useState('');
@@ -20,8 +23,7 @@ const SingUp = ({ navigation }) => {
 
     const [addShop] = useMutation(ADD_SHOP, {
         variables: { shopID, image, shopName, email, password, phoneNo, Dis, name, location, Otime, Ctime },
-
-        // refetchQueries: [{ query: ADD_SHOP }]
+        refetchQueries: [{ query: GET_SHOPS }]
     });
 
     const HandelSingUp = async () => {
