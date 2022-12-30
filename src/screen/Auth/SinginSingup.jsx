@@ -1,5 +1,6 @@
 
-import { Button, Center, HStack, Image, Text, View } from 'native-base'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button, Center, HStack, Image, Spacer, Spinner, Text, View } from 'native-base'
 import React, { useState } from 'react'
 import { TextInput, TouchableOpacity } from 'react-native'
 import { CallAPI } from '../../utils/APIcall';
@@ -9,8 +10,16 @@ const SinginSingup = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [incorrect, setIncorrect] = useState(false);
 
   const { loading, error, data } = CallAPI(GET_SHOPS, "ALLSHOPS")
+
+  {
+    loading ?
+      <View>
+        <Spinner size='lg' />
+      </View> : null
+  }
 
   let shopsData;
   let lastIndex = 0;
@@ -25,16 +34,16 @@ const SinginSingup = ({ navigation }) => {
 
   // sing in auth
   const handelSingin = async () => {
-    data.AllShopes.map((item, i) => {
+    await data.AllShopes.map((item, i) => {
       if (data?.AllShopes[i]?.email == email && data?.AllShopes[i]?.password == password) {
         shopsData = item;
         navigation.navigate("HomeScreen", { shopsData });
       }
     })
-
     if (email === "" || password === "") {
       return alert("Enter somthing")
     }
+    setIncorrect(true)
 
   }
 
@@ -63,12 +72,16 @@ const SinginSingup = ({ navigation }) => {
               backgroundColor: "#FFF", padding: 6, borderRadius: 12, fontSize: 14, fontWeight: '500', paddingHorizontal: 12
             }}
           />
+          {incorrect ? <HStack>
+            <Spacer />
+            <Text fontSize={10} underline color='red.800' fontFamily='body' >Incorrect password</Text>
+          </HStack> : null}
         </View>
 
         <Button p={3} bg="text" borderRadius={12} mt={10}
           onPress={handelSingin}
         >
-          <Text color='white' fontSize={16} fontFamily='body' >Sing In</Text>
+          <Text color='white' fontWeight={600} fontSize={16} fontFamily='body' >Sing In</Text>
         </Button>
       </View>
 

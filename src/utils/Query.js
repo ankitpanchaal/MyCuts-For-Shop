@@ -51,6 +51,15 @@ export const Delete_Service = gql`
 }
 `;
 
+export const UPDATE_QUEUE = gql`
+    mutation DeletService($id: ID!, $Queue: Int){
+        UpdateShop(id: $id , Queue: $Queue){
+            id
+        }
+    }
+
+`;
+
 export const ADD_SHOP = gql`
     mutation addShop(
         $shopName: String!,
@@ -82,17 +91,29 @@ export const ADD_SHOP = gql`
         }
     }
 `
-// export const GET_HOME_SCREEEN_DATA = gql`
-// query ALLDATA{
-//     AllServices{
-//         id
-//         title
-//         offer
-//         offerDis
-//         price
-//         tag
-//         Image
-//         ShopID
-//     }
-// }
-// `;
+export const ADDSERVICE_s = gql`
+    mutation addServices(
+        $title: String!,
+        $description: String!,
+        $price: String!,
+        $shopID: ID!,
+        $image: String!,
+        $offer: Boolean!,
+        $offerDis: String!,
+        $Tag: String!,
+    ){
+        addServices(
+            description: $description,
+            Image: $image,
+            offer: $offer,
+            offerDis: $offerDis,
+            price: $price,
+            ShopID: $shopID,
+            tag: $Tag,
+            title: $title
+        ){
+            description,
+            Image
+        }
+    }
+`;
