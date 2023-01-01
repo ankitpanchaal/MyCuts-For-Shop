@@ -4,7 +4,6 @@ const BookingsCard = () => {
     return (
         <FlatList
             showsVerticalScrollIndicator={false}
-            pagingEnabled
             data={[1, 2, 3, 4, 5]}
             keyExtractor={key => key}
             renderItem={({ item }) =>

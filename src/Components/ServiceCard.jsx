@@ -42,6 +42,7 @@ const ServiceCard = ({ navigation, apiData, currShopID }) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => {
+                // console.log(item?.ShopID, "==", currShopID);
                 return (
                     item?.ShopID === currShopID ?
                         <TouchableOpacity activeOpacity={0.8}

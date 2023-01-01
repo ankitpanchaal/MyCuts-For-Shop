@@ -63,7 +63,7 @@ export const UPDATE_QUEUE = gql`
 export const ADD_SHOP = gql`
     mutation addShop(
         $shopName: String!,
-        $shopID: ID!,
+        $shopID: String!,
         $phoneNo: String!,
         $email: String!,
         $image: String!,
@@ -96,7 +96,7 @@ export const ADDSERVICE_s = gql`
         $title: String!,
         $description: String!,
         $price: String!,
-        $shopID: ID!,
+        $shopID: String!,
         $image: String!,
         $offer: Boolean!,
         $offerDis: String!,

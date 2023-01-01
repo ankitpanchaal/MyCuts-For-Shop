@@ -31,10 +31,9 @@ const HomeScreen = ({ navigation, route }) => {
                     />
                 </TouchableOpacity>
 
-                <View>
+                <View w='45%' >
                     <Text fontFamily='body' fontSize={16} color='bg' mt={5} underline
                         fontWeight={700}
-                        mr={20}
                     >{shopsData?.ShopName}</Text>
                 </View>
 
@@ -69,7 +68,7 @@ const HomeScreen = ({ navigation, route }) => {
             <View mt={6} mx={2} >
                 <Text fontFamily='body' fontSize={16} color='text'
                     fontWeight={600} >Bookings</Text>
-                <View mt={2} h={190} bg="#fff" borderRadius={12} shadow={2} p={5} >
+                <View mt={2} h={290} bg="#fff" borderRadius={12} shadow={2} p={5} >
                     <BookingsCard />
                 </View>
 

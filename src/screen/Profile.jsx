@@ -21,7 +21,7 @@ const Profile = ({ route, navigation }) => {
                     h="170" w="96%" borderRadius={16} alignSelf='center'
                     source={{ uri: shopsData?.Image }}
                 />
-                <View mx={4} bg='text' borderRadius={16} p={7} mt="6" >
+                <View mx={4} bg='text' borderRadius={16} p={7} mt="6">
                     <DetailsCard t1='Shop Name' t2={shopsData?.ShopName}
                         icon={
                             <View mr={1} >
@@ -100,8 +100,8 @@ const DetailsCard = ({ t1, t2, icon = "" }) => {
             <Text fontFamily='body' fontSize={14}
                 w="45%" fontWeight={500} color='white'
             >{t1} - </Text>
-            <Text fontFamily='body' fontSize={14}
-                fontWeight={400} color='white'
+            <Text fontFamily='body' fontSize={14} w="52%"
+                fontWeight={400} color="#c2c2c2"
             >{t2}</Text>
         </HStack>
     )

@@ -7,7 +7,6 @@ import { ADD_SHOP, GET_SHOPS } from '../../utils/Query'
 
 const SingUp = ({ navigation, route }) => {
     const { lastIndex } = route.params || {};
-    console.log(lastIndex);
 
     const [shopID, setShopID] = useState(lastIndex);
     const [shopName, setShopName] = useState('');
