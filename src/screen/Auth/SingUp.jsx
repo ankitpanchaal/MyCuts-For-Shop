@@ -32,26 +32,9 @@ const SingUp = ({ navigation, route }) => {
         //8016702347
         await addShop(shopID, image, shopName, email, password, phoneNo, Dis, name, location, Otime, Ctime);
 
-        setShopName('')
-        setEmail('')
-        setPassword('')
-        setPhoneNo('')
-        setDis('')
-        setName('')
-        setLocation('')
-        setOtime('')
-        setCtime('')
-
-
-        setTimeout(() => {
-            <View flex={1} bg='red.300' >
-                <Spinner />
-            </View>
-        }, 1000);
-
-        if (!shopName == "" || !email == "" || !password == "" || !phoneNo == "" || !Dis == "" || !name == "" || !location == "" || !Otime == "") {
-            navigation.goBack()
-        }
+        // if (!shopName == "" || !email == "" || !password == "" || !phoneNo == "" || !Dis == "" || !name == "" || !location == "" || !Otime == "") {
+        navigation.goBack()
+        // }
 
 
     }
